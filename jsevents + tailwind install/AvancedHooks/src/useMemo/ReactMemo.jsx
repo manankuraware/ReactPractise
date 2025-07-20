@@ -4,8 +4,7 @@ import { Counts } from "./MemoCount";
 export const ReactMemo = () => {
   const [count, setCount] = useState(0);
 
-  //  {};
-
+  // myBioData hamara object jisko hmne mmorize kra h tak object tabhi update ho jb usme change ho
   const myBioData = useMemo(() => {
     return {
       name: "thapa",
