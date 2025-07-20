@@ -1,0 +1,35 @@
+span {
+    border-radius: 10px;
+}
+
+.superhit {
+    color: yellow;
+    font-weight: 600;
+    background-color: green;
+    padding: 5px;
+}
+
+.Average {
+    color: red;
+    font-weight: 600;
+    background-color: yellow;
+    padding: 5px;
+}
+
+.cardImg img {
+    width: 100%;
+    display: block;
+}
+
+.cardItms {
+    width: calc(50% - 10px);
+}
+
+.card-Summary {
+    box-shadow: 0 0 1px inset;
+    padding: 13px 33px;
+}
+
+/* Using CSS Modules in React brings several benefits. First,
+it helps to avoid global CSS classes that can lead to naming conflicts and unexpected side effects. With CSS Modules,
+I can use the same class name in multiple CSS modules without worrying about clashes. */
