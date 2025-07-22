@@ -10,39 +10,49 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import { Movie } from "./pages/Movie";
 import { Contact } from "./pages/Contact";
+import { AppLayout } from "./components/layout/AppLayout";
+import { ErrorPage } from "./pages/ErrorPage";
 
 function App() {
   // using traditional way of router
-  // const router = createBrowserRouter([
-  //   {
-  //     path: "/",
-  //     element: <Home />,
-  //   },
-  //   {
-  //     path: "/about",
-  //     element: <About />,
-  //   },
-  //   {
-  //     path: "/movie",
-  //     element: <Movie />,
-  //   },
-  //   {
-  //     path: "/contact",
-  //     element: <Contact />,
-  //   },
-  // ]);
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <AppLayout />,
+      // The error element renders instead of the children when the promise rejects.
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/about",
+          element: <About />,
+        },
+        {
+          path: "/movie",
+          element: <Movie />,
+        },
+        {
+          path: "/contact",
+          element: <Contact />,
+        },
+      ],
+    },
+  ]);
 
-  // using latest way of helper Function
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/movie" element={<Movie />} />
-        <Route path="/contact" element={<Contact />} />
-      </Route>
-    )
-  );
+  // using  way of helper Function
+  // const router = createBrowserRouter(
+  //   createRoutesFromElements(
+  //     <Route>
+  //       <Route path="/" element={<Home />} />
+  //       <Route path="/about" element={<About />} />
+  //       <Route path="/movie" element={<Movie />} />
+  //       <Route path="/contact" element={<Contact />} />
+  //     </Route>
+  //   )
+  // );
 
   return <RouterProvider router={router} />;
 }
