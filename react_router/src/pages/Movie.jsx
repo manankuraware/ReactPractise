@@ -1,5 +1,13 @@
 import React from "react";
+import { useLoaderData } from "react-router-dom";
+import { Card } from "../components/UI/Card";
 
 export const Movie = () => {
-  return <div>Hello React Movie</div>;
+  const moviesData = useLoaderData();
+  console.log(moviesData);
+  return (
+    <>
+      <Card key={moviesData.imdbID} data={moviesData} />
+    </>
+  );
 };

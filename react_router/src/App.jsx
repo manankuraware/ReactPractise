@@ -12,6 +12,7 @@ import { Movie } from "./pages/Movie";
 import { Contact } from "./pages/Contact";
 import { AppLayout } from "./components/layout/AppLayout";
 import { ErrorPage } from "./pages/ErrorPage";
+import { getMoviesData } from "./api/GetApiData";
 
 function App() {
   // using traditional way of router
@@ -33,6 +34,7 @@ function App() {
         {
           path: "/movie",
           element: <Movie />,
+          loader: getMoviesData,
         },
         {
           path: "/contact",
