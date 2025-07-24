@@ -10,10 +10,11 @@ export const MovieDetails = () => {
 
   return (
     <div className="maincard">
-      <div className="moviecards" id={moviesData.imdbID}>
-        <h1>{moviesData.Title}</h1>
+      <div className="moviecards">
+        <p>{moviesData.Title}</p>
+        <p>{moviesData.Released}</p>
         <p>{moviesData.Actors}</p>
-        <img src={moviesData.Poster} alt={moviesData.Title} />
+        <p>{moviesData.Director}</p>
       </div>
     </div>
   );
