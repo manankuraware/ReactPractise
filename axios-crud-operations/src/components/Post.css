@@ -1,0 +1,11 @@
+ol.post-wrapper {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 10px;
+    list-style-position: inside;
+}
+
+.post-wrapper li {
+    box-shadow: 0 0 6px #9f8b8b;
+    padding: 1rem;
+}
