@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { getPost } from "../api/PostApi";
+import { deletePost, getPost } from "../api/PostApi";
 import "./Post.css";
 
 export default function Post() {
   const [data, setData] = useState([]);
 
+  // function to get post
   const getPostData = async () => {
     const res = await getPost();
     console.log(res.data);
@@ -14,6 +15,22 @@ export default function Post() {
   useEffect(() => {
     getPostData();
   }, []);
+
+  // function to delete post
+  const handleDeletePost = async (id) => {
+    try {
+      const res = await deletePost(id);
+      if (res.status === 200) {
+        const newUpdatedPosts = data.filter((curPost) => {
+          return curPost.id != id;
+        });
+        setData(newUpdatedPosts);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <section className="post-container">
       <ol className="post-wrapper">
@@ -24,7 +41,13 @@ export default function Post() {
               <p>{title}</p>
               <p>{body}</p>
               <button>Edit</button>
-              <button>Delete</button>
+              <button
+                onClick={() => {
+                  handleDeletePost(id);
+                }}
+              >
+                Delete
+              </button>
             </li>
           );
         })}
