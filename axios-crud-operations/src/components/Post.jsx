@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { deletePost, getPost } from "../api/PostApi";
 import "./Post.css";
+import { Form } from "./Form";
 
 export default function Post() {
   const [data, setData] = useState([]);
@@ -33,6 +34,7 @@ export default function Post() {
 
   return (
     <section className="post-container">
+      <Form data={data} setData={setData} />
       <ol className="post-wrapper">
         {data.map((curElem) => {
           const { id, body, title } = curElem;
