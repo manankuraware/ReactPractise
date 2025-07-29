@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { postData } from "../api/PostApi";
+import { postData, updateData } from "../api/PostApi";
 
 export const Form = ({ data, setData, updateDataApi, setUpdateDataApi }) => {
   const [addData, setAddData] = useState({
@@ -7,6 +7,7 @@ export const Form = ({ data, setData, updateDataApi, setUpdateDataApi }) => {
     body: "",
   });
 
+  const isEmpty = Object.keys(updateDataApi).length === 0;
   // get updated data into input field
   useEffect(() => {
     updateDataApi &&
@@ -35,10 +36,36 @@ export const Form = ({ data, setData, updateDataApi, setUpdateDataApi }) => {
       setAddData({ title: "", body: "" });
     }
   };
+
+  // update post
+  const updatePostdata = async () => {
+    try {
+      const res = await updateData(updateDataApi.id, addData);
+      if (res.status === 200) {
+        setData((prev) => {
+          return prev.map((curElem) => {
+            return curElem.id === res.data.id ? res.data : curElem;
+          });
+        });
+        setAddData({ title: "", body: "" });
+        setUpdateDataApi({});
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   //   form submission
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    addPostData();
+
+    // to get form submit button value
+    const action = e.nativeEvent.submitter.value;
+    if (action === "Add") {
+      addPostData();
+    } else if (action === "Edit") {
+      updatePostdata();
+    }
   };
   return (
     <form onSubmit={handleFormSubmit}>
@@ -63,7 +90,9 @@ export const Form = ({ data, setData, updateDataApi, setUpdateDataApi }) => {
           value={addData.body}
           onChange={handleInputChange}
         />
-        <button type="submit">Add</button>
+        <button type="submit" value={isEmpty ? "Add" : "Edit"}>
+          {isEmpty ? "Add" : "Edit"}
+        </button>
       </div>
     </form>
   );
