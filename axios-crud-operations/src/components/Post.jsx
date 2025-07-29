@@ -5,6 +5,7 @@ import { Form } from "./Form";
 
 export default function Post() {
   const [data, setData] = useState([]);
+  const [updateDataApi, setUpdateDataApi] = useState({});
 
   // function to get post
   const getPostData = async () => {
@@ -32,9 +33,17 @@ export default function Post() {
     }
   };
 
+  // function to update post
+  const handleUpdatePost =  (curElem) => setUpdateDataApi(curElem);
+
   return (
     <section className="post-container">
-      <Form data={data} setData={setData} />
+      <Form
+        data={data}
+        setData={setData}
+        updateDataApi={updateDataApi}
+        setUpdateDataApi={setUpdateDataApi}
+      />
       <ol className="post-wrapper">
         {data.map((curElem) => {
           const { id, body, title } = curElem;
@@ -42,7 +51,13 @@ export default function Post() {
             <li key={id}>
               <p>{title}</p>
               <p>{body}</p>
-              <button>Edit</button>
+              <button
+                onClick={() => {
+                  handleUpdatePost(curElem);
+                }}
+              >
+                Edit
+              </button>
               <button
                 onClick={() => {
                   handleDeletePost(id);

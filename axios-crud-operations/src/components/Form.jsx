@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { postData } from "../api/PostApi";
 
-export const Form = ({ data, setData }) => {
+export const Form = ({ data, setData, updateDataApi, setUpdateDataApi }) => {
   const [addData, setAddData] = useState({
     title: "",
     body: "",
   });
+
+  // get updated data into input field
+  useEffect(() => {
+    updateDataApi &&
+      setAddData({
+        title: updateDataApi.title || "",
+        body: updateDataApi.body || "",
+      });
+  }, [updateDataApi]);
+
   const handleInputChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -20,7 +30,7 @@ export const Form = ({ data, setData }) => {
 
   const addPostData = async () => {
     const res = await postData(addData);
-    if (res.status = 201) {
+    if ((res.status = 201)) {
       setData([...data, res.data]);
       setAddData({ title: "", body: "" });
     }
