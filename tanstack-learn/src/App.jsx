@@ -5,6 +5,8 @@ import { FetchOld } from "./pages/FetchOld";
 import { MainLayout } from "./component/Layout/MainLayout";
 import { Home } from "./pages/Home";
 
+import "./App.css";
+
 const router = createBrowserRouter([
   {
     path: "/",
