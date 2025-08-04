@@ -6,6 +6,7 @@ import { MainLayout } from "./component/Layout/MainLayout";
 import { Home } from "./pages/Home";
 
 import "./App.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const router = createBrowserRouter([
   {
@@ -29,5 +30,11 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router}></RouterProvider>;
+  const queryCLient = new QueryClient();
+
+  return (
+    <QueryClientProvider client={queryCLient}>
+      <RouterProvider router={router}></RouterProvider>;
+    </QueryClientProvider>
+  );
 }

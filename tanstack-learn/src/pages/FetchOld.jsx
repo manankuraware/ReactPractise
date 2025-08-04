@@ -1,5 +1,5 @@
 import React from "react";
 
 export const FetchOld = () => {
-  return <div>FetchOld</div>;
+  return <h1>FetchOld using axios method that i learned earlier</h1>;
 };
