@@ -3,10 +3,18 @@ import React from "react";
 import { fetchPosts } from "../API/api";
 
 export const FetchRq = () => {
-  const { data } = useQuery({
+  const { data, isLoading, error, isError } = useQuery({
     queryKey: ["posts"],
     queryFn: fetchPosts,
+    // gcTime: 5000,
+    // staleTime: 5000,
+    refetchInterval: 1000,
+    refetchIntervalInBackground: true,
   });
+
+  if (isLoading) return <p>is Loading...</p>;
+  if (isError) return <p>Error: {error.message}</p>;
+
   return (
     <div>
       <ul className="section-accordion">
