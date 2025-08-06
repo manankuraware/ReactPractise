@@ -8,6 +8,7 @@ import { Home } from "./pages/Home";
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import FetchInv from "./component/UI/FetchInv";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/rq",
         element: <FetchRq />,
+      },
+      {
+        path: "/rq/:id",
+        element: <FetchInv />,
       },
     ],
   },
