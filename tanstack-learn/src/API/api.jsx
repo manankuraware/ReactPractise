@@ -4,7 +4,7 @@ const api = axios.create({
   baseURL: "https://jsonplaceholder.typicode.com",
 });
 
-// to fetch the data
+// to fetch the data with pagination
 export const fetchPosts = async (pageNumber) => {
   try {
     const res = await api.get(`/posts?_start=${pageNumber}&_limit=3`);
@@ -22,4 +22,16 @@ export const fetchInvPost = async (id) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+// to delete the data
+
+export const deletePost = (id) => {
+  return api.delete(`/posts/${id}`);
+};
+
+// update post
+
+export const updatePost = (id) => {
+  return api.patch(`/posts/${id}`, { title: "I have updated" });
 };
